@@ -1,0 +1,27 @@
+name: Create Custom ZIP for Release
+
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Rename folder and zip
+        run: |
+          mv $GITHUB_WORKSPACE "MyPlaytimeTracker"
+          zip -r "MyPlaytimeTracker.zip" "MyPlaytimeTracker"
+
+      - name: Upload release asset
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./desired-folder-name.zip
+          asset_name: desired-folder-name.zip
+          asset_content_type: application/zip
