@@ -13,10 +13,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Rename folder and zip
+      - name: Rename folder and package into ZIP
         run: |
-          mv $GITHUB_WORKSPACE "MyPlaytimeTracker"
-          zip -r "MyPlaytimeTracker.zip" "MyPlaytimeTracker"
+          mkdir "desired-folder-name"
+          cp -R . "desired-folder-name"
+          zip -r "desired-folder-name.zip" "desired-folder-name"
 
       - name: Upload release asset
         uses: actions/upload-release-asset@v1
