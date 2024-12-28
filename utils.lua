@@ -68,6 +68,7 @@ local function saveSeshData()
     SeshSavedData.isLoggedOut = Sesh.isLoggedOut
     SeshSavedData.logoutTime = Sesh.logoutTime
     SeshSavedData.sessionDuration = Sesh.sessionDuration
+    SeshSavedData.afkTime = Sesh.afkTime
 end
 
 local function loadSeshData()
@@ -79,6 +80,7 @@ local function loadSeshData()
     Sesh.timeLimit = SeshSavedData.timeLimit
     Sesh.isLoggedOut = SeshSavedData.isLoggedOut
     Sesh.logoutTime = SeshSavedData.logoutTime
+    Sesh.afkTime = SeshSavedData.afkTime
 end
 
 local function initaliseSeshData()

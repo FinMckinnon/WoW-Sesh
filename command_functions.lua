@@ -68,7 +68,7 @@ end
 
 local function saveSessionData()
     if Sesh.sessionStart then
-        local currentTime = (Sesh.paused and Sesh.pauseTime) or (Sesh.afk and Sesh.afkTime) or time()
+        local currentTime = (Sesh.paused and Sesh.pauseTime) or (Sesh.afkTime) or time()
         Sesh.sessionDuration = currentTime - Sesh.sessionStart
         Sesh.totalPlaytime = Sesh.totalPlaytime + Sesh.sessionDuration
         

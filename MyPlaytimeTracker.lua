@@ -55,6 +55,9 @@ frame:SetScript("OnEvent", function(self, event, arg1)
     if event == "PLAYER_LOGOUT" then
         Sesh.isLoggedOut = true
         Sesh.logoutTime = time() 
+        if Sesh.afkTime then
+            handleAFKResume()
+        end
         saveSeshData()
         stopAceSeshTimer()
     end

@@ -31,6 +31,10 @@ local function handleLogin()
     local logoutDuration = Sesh.logoutTime and (time() - Sesh.logoutTime) or 0
     if Sesh.paused then
         print("Current session is paused at: " .. Sesh.sessionDuration .. " seconds.")
+    
+    elseif Sesh.afkTime then
+        handleAFKResume()
+
     elseif Sesh.sessionStart then
         Sesh.sessionStart = Sesh.sessionStart + logoutDuration
         startAceSeshTimer()
@@ -44,20 +48,22 @@ local function handleLogin()
     end
 end
 
+local function handleAFKResume()
+    local afkDuration = time() - (Sesh.afkTime or time())
+    Sesh.sessionStart = Sesh.sessionStart + afkDuration -- Adjust session start
+    Sesh.afkTime = nil
+end
+
 local function handleAFK()
     local isAFK = UnitIsAFK("player") 
     if Sesh.sessionStart and not Sesh.paused then
-        if isAFK and not Sesh.afk then
+        if isAFK and not Sesh.afkTime then
             -- Player just went AFK
-            Sesh.afk = true
             Sesh.afkTime = time() -- Record the time they went AFK
             print("Player is now AFK. Session paused.")
         elseif not isAFK and Sesh.afk then
             -- Player just returned from AFK
-            local afkDuration = time() - (Sesh.afkTime or time())
-            Sesh.sessionStart = Sesh.sessionStart + afkDuration -- Adjust session start
-            Sesh.afk = false
-            Sesh.afkTime = nil
+            handleAFKResume()
             print("Player is no longer AFK. Session resumed. Adjusted for AFK time: " .. formatTime(afkDuration))
         end
     end
@@ -67,3 +73,4 @@ end
 _G["handleTimeLimit"] = handleTimeLimit
 _G["handleLogin"] = handleLogin
 _G["handleAFK"] = handleAFK
+_G["handleAFKResume"] = handleAFKResume
