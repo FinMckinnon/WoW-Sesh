@@ -1,0 +1,27 @@
+## Interface: 11403
+## Title: My Playtime Tracker
+## Notes: Tracks weekly playtime
+## Author: YourName
+## Version: 1.0
+## SavedVariables: SeshSettings, SESHDB, SeshSavedData
+
+## Libraries
+Libs\AceTimer-3.0\AceTimer-3.0.lua
+
+## Core Files
+Ini.lua
+settings_data.lua
+utils.lua
+command_functions.lua
+event_handlers.lua
+MyPlaytimeTracker.lua
+aceHandler.lua
+
+## Settings UI
+settings_panel_ini.lua
+settings_components_handlers.lua
+settings_components.lua
+settings_panel_ui.lua
+
+## Counter UI
+sesh_counter_ui.lua
