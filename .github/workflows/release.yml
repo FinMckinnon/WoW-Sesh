@@ -31,3 +31,5 @@ jobs:
           asset_path: ./MyPlaytimeTracker.zip
           asset_name: MyPlaytimeTracker.zip
           asset_content_type: application/zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
